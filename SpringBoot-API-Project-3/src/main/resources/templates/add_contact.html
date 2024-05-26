@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base1::layout(~{::section})" >
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+
+<div class="card mr-3 ml-3 ">
+
+<div class="card-body">
+
+<h1 class="text-center">Add Contact</h1>
+
+<div class="container-fluid mt-1">
+
+
+<div class="row">
+
+<div class="col-md-8 offset-md-2">
+
+<form action="#"
+th:object="${contact}"
+enctype="multipart/form-data"
+method="POST"
+th:action="@{/user/process-contact}"
+class="mt-2">
+ <label for="name">Contact Name</label>
+<div class="input-group">
+
+<div class="input-group-prepend">
+<div class="input-group-text">
+<i class="fa fa-plus"></i>
+
+
+</div>
+</div>
+<input type="text" id="firstName" 
+th:classappend="${#fields.hasErrors('name')?'is-invalid':''}" 
+ th:value="${contact.name}"
+name="name" placeholder="Enter Name Here" class="form-control">
+      <div  th:each="e : ${#fields.errors('name')}" th:text="${e}" class="invalid-feedback"></div>
+</div>
+
+<div class="mt-3">		
+ <label for="name">Contact Nick Name</label>
+<div class="input-group">
+
+<div class="input-group-prepend">
+<div class="input-group-text">
+<i class="fa fa-user-alt"></i>
+</div>
+</div>
+<input type="text" id="secondName" th:classappend="${#fields.hasErrors('secondName')?'is-invalid':''}" 
+ th:value="${contact.secondName}"
+ name="secondName" placeholder="Enter Second Name Here" class="form-control">
+      <div  th:each="e : ${#fields.errors('secondName')}" th:text="${e}" class="invalid-feedback"></div>
+</div>
+</div>
+
+<div class="mt-3">	
+ <label for="name">Contact Phone Number</label>
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">
+<i class="fa fa-phone"></i>
+</div>
+</div>
+<input type="number" id="phone" th:classappend="${#fields.hasErrors('phone')?'is-invalid':''}" 
+ th:value="${contact.phone}"
+ name="phone" placeholder="Enter Phone Number Here" class="form-control">
+      <div  th:each="e : ${#fields.errors('phone')}" th:text="${e}" class="invalid-feedback"></div>
+</div>
+</div>
+
+
+<div class="mt-3">	
+ <label for="name">Contact Email</label>
+<div class="input-group">
+
+<div class="input-group-prepend">
+<div class="input-group-text">
+<i class="fa-regular fa-envelope"></i>
+
+</div>
+</div>
+<input type="email" id="email" th:classappend="${#fields.hasErrors('email')?'is-invalid':''}" 
+ th:value="${contact.email}"
+  name="email" placeholder="Enter email Here" class="form-control">
+ <div  th:each="e : ${#fields.errors('email')}" th:text="${e}" class="invalid-feedback"></div>
+</div>
+</div>
+
+<div class="mt-3">	
+ <label for="name">Contact Designation</label>
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">
+<i class="fa-solid fa-briefcase"></i>
+</div>
+</div>
+<!--  <select class="form-control" id="work" th:classappend="${#fields.hasErrors('work')?'is-invalid':''}" 
+ th:value="${contact.work}" name="work"  aria-label="Default select example">
+      <option selected disabled value="">Select Work location</option>
+  <option value="1">Delhi</option>
+  <option value="2">Mumbai</option>
+  <option value="3">Banglore</option>
+    <option value="4">Hyderabad</option>
+      <option value="5">Ahemdabad</option>
+        <option value="6">Noida</option>
+          <option value="7">Gurugram</option>
+</select>  -->
+<input type="text" id="secondName" th:classappend="${#fields.hasErrors('work')?'is-invalid':''}" 
+ th:value="${contact.work}"
+ name="work" placeholder="Enter work Here" class="form-control">
+ <div  th:each="e : ${#fields.errors('work')}" th:text="${e}" class="invalid-feedback"></div>
+</div>
+</div>
+
+<div class="mt-3">
+ <label for="name">Contact Description</label>
+<div class="form-group">
+<textarea id="mytextarea" name="description" th:classappend="${#fields.hasErrors('description')?'is-invalid':''}" 
+ th:value="${contact.description}"
+ rows="10" class="form-control" placeholder="enter contact description"></textarea>
+  <div  th:each="e : ${#fields.errors('description')}" th:text="${e}" class="invalid-feedback"></div>
+</div>
+</div>
+
+<div class="mt-3">
+<p>choose contact pic (optional)</p>
+<div class="custom-file">
+<input type="file" name="profileImage" />
+</div>
+<div class="conainer text-center">
+<button class="btn btn-outline-primary">save contact</button>
+</div>
+</form>
+</div>
+</div></div>
+</div>
+</div>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+ <!--<script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>-->
+	<!-- Place the first <script> tag in your HTML's <head> -->
+	<script src="https://cdn.tiny.cloud/1/watespq4c1gge1a40fzj7kr3abvmvqbxcquebg90c7f6ngnu/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+	<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+	<script>
+	  tinymce.init({
+	    selector: 'textarea',
+	    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+	    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+	    tinycomments_mode: 'embedded',
+	    tinycomments_author: 'Author name',
+	    mergetags_list: [
+	      { value: 'First.Name', title: 'First Name' },
+	      { value: 'Email', title: 'Email' },
+	    ],
+	    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+	  });
+	</script>
+	<textarea>
+	  Welcome to TinyMCE!
+	</textarea>
+</section>
+</body>
+</html>
